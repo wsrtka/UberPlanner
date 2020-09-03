@@ -3,10 +3,18 @@
 class MemoryHandler:
 
     def __init__(self):
-        pass
+
+        self.cars = []
+        self.drivers = []
 
     def save_driver(self, driver):
-        pass
+        self.drivers.append(driver)
 
     def save_car(self, car):
-        pass
+        self.cars.append(car)
+
+    def get_cars(self):
+        return self.cars
+
+    def get_drivers(self):
+        return self.drivers
