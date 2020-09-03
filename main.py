@@ -1,4 +1,5 @@
 from Parser import Parser
+from MemoryHandler import MemoryHandler
 
 
 if __name__ == '__main__':
@@ -6,7 +7,8 @@ if __name__ == '__main__':
     cars = []
     drivers = []
 
-    input_parser = Parser()
+    memory_handler = MemoryHandler()
+    input_parser = Parser(memory_handler)
 
     while True:
 

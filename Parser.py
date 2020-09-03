@@ -13,9 +13,18 @@ class Parser:
         exit                closes the program
     """
 
-    def __init__(self):
-        
-        pass
+    def __init__(self, mem_handler):
+        self.memory_handler = mem_handler
+
+    def get_user_input(self, var_name, required=True):
+
+        user_input = None
+        prefix = '(Required)' if required else '(Optional)'
+
+        while input is None:
+            user_input = input('%s Enter %s:\n' %(prefix, var_name))
+
+        return user_input
 
 
     def parse(self, input):
@@ -32,24 +41,45 @@ class Parser:
 
             if words[1] == 'driver':
                 
-                name = input('Enter driver name:\n')
-                surname = input('Enter driver surname:\n')
+                new_driver = Driver()
 
-                return Driver(name, surname)
+                name = self.get_user_input('driver name')
+                new_driver.set_name(name)
+
+                surname = self.get_user_input('driver surname')
+                new_driver.set_surname(surname)
+
+                self.memory_handler.save_driver(new_driver)
 
             elif words[1] == 'car':
                 
-                manufacturer = input('Enter car manufacturer:\n')
-                model = input('Enter car model:\n')
-                color = input('Enter car color:\n')
-                plate = input('Enter car license plate:\n')
+                new_car = Car()
 
-                body = input('(Optional) Enter car body type:\n')
-                fuel = input('(Optional) Enter car fuel type:\n')
-                card = input('(Optional) Enter car fuel card number:\n')
-                pin = input('(Optional) Enter car fuel card pin number:\n')
+                manufacturer = self.get_user_input('car manufacturer')
+                new_car.set_manufacturer(manufacturer)
 
-                return Car(manufacturer, model, color, plate)
+                model = self.get_user_input('car model')
+                new_car.set_model(model)
+
+                color = self.get_user_input('car color')
+                new_car.set_color(color)
+
+                plate = self.get_user_input('car license plate')
+                new_car.set_plate(plate)
+
+                body = self.get_user_input('car body type', required=False)
+                new_car.set_body(body)
+
+                fuel = self.get_user_input('car fuel type', required=False)
+                new_car.set_fuel(fuel)
+
+                card = self.get_user_input('car fuel card number', required=False)
+                new_car.set_card(card)
+
+                pin = self.get_user_input('car fuel card pin number', required=False)
+                new_car.set_pin(pin)
+
+                self.memory_handler.save_car(new_car)
 
         else:
             print('Could not understand input')
