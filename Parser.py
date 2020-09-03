@@ -18,11 +18,11 @@ class Parser:
         self.memory_handler = mem_handler
 
     def get_user_input(self, var_name, required=True):
-        
-        user_input = None
-        prefix = '(Required)' if required else '(Optional)'
 
-        while user_input is None:
+        prefix = '(Required)' if required else '(Optional)'
+        user_input = input('%s Enter %s:\n' %(prefix, var_name))
+
+        while len(user_input) == 0 and required:
             user_input = input('%s Enter %s:\n' %(prefix, var_name))
 
         return user_input
