@@ -30,7 +30,7 @@ class Parser:
 
     def parse(self, input):
 
-        words = input.split(' ')
+        words = input.lower().split(' ')
 
         if words[0] == 'help':
             print(self.__doc__)
@@ -81,6 +81,32 @@ class Parser:
                 new_car.set_pin(pin)
 
                 self.memory_handler.save_car(new_car)
+
+            elif words[1] == 'timetable':
+                pass
+
+        elif words[0] == 'get':
+
+            if words[1] == 'car':
+                pass
+
+            elif words[1] == 'driver':
+                pass
+
+            elif words[1] == 'timetable':
+                pass
+
+            elif words[1] == 'cars':
+                pass
+
+            elif words[1] == 'drivers':
+                pass
+
+            elif words[1] == 'timetables':
+                pass
+
+            elif words[1] == 'solution':
+                pass
 
         else:
             print('Could not understand input')
