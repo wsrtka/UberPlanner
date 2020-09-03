@@ -4,14 +4,13 @@ from MemoryHandler import MemoryHandler
 
 if __name__ == '__main__':
 
-    cars = []
-    drivers = []
-
     memory_handler = MemoryHandler()
     input_parser = Parser(memory_handler)
 
+    input_parser.parse('help')
+
     while True:
 
-        action = input('Select action (type help for help)\n')
+        action = input('Select action\n')
 
         input_parser.parse(action)
