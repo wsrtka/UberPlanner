@@ -3,6 +3,7 @@ import sys
 
 from Driver import Driver
 from Car import Car
+from Timetable import Timetable
 
 
 class Parser:
@@ -83,7 +84,28 @@ class Parser:
                 self.memory_handler.save_car(new_car)
 
             elif words[1] == 'timetable':
-                pass
+                
+                new_timetable = Timetable()
+
+                owner = self.get_user_input('timetable owner')
+                owner = owner.split()
+
+                driver = self.memory_handler.get_driver(owner[0], owner[1])
+
+                if driver is None:
+                    print('Could not find driver!')
+                    return
+
+                for day in range(7):
+                    
+                    start_time = self.get_user_input('beginning of shift for day ' + day, required=False)
+                    
+                    if len(start_time):
+                        end_time = self.get_user_input('end of shift')
+
+                    new_timetable.set_preferences(day, (start_time, end_time))
+                
+                self.memory_handler.save_timetable(new_timetable)
 
         elif words[0] == 'get':
 

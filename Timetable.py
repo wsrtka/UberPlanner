@@ -3,10 +3,10 @@
 class Timetable:
 
     def __init__(self):
-        self.dispositions = None
+        self.dispositions = [False * 7]
 
     def set_owner(self, driver):
-        pass
+        self.owner = driver
 
-    def set_preferences(self, preferences):
-        pass
+    def set_preferences(self, day, times):
+        self.dispositions[day] = times
