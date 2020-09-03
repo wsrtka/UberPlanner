@@ -97,10 +97,10 @@ class Parser:
                 pass
 
             elif words[1] == 'cars':
-                pass
+                print(self.memory_handler.get_cars())
 
             elif words[1] == 'drivers':
-                pass
+                print(self.memory_handler.get_drivers())
 
             elif words[1] == 'timetables':
                 pass
@@ -110,6 +110,4 @@ class Parser:
 
         else:
             print('Could not understand input')
-
-        return None
         
