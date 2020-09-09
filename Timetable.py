@@ -3,23 +3,19 @@
 class Timetable:
 
     def __init__(self):
-        self.dispositions = [False * 7]
-
-    def set_owner(self, driver):
-        self.owner = driver
+        self.dispositions = [[False] * 24 for i in range(7)]
 
     def set_preferences(self, day, times):
 
         if times[0] >= times[1]:
 
-            if not self.dispositions[day]:
-                self.dispositions[day] = (None, times[0])
+            for i in range(times[0], 24):
+                self.dispositions[day][i] = True
 
-            else:
-                self.dispositions[day] = (self.dispositions[day][0], times[0])
-
-            self.dispositions[(day + 1) % 7] = (times[1], None)
+            for i in range(0, times[1]):
+                self.dispositions[(day + 1) % 7][i] = True
 
         else:
 
-            self.dispositions[day] = times
+            for i in range(times[0], times[1]):
+                self.dispositions[day][i] = True

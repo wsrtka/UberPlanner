@@ -4,6 +4,7 @@ class Driver:
 
     def __init__(self):
         self.priority = False
+        self.timetable = None
 
     def set_name(self, name):
         self.name = name
@@ -13,3 +14,9 @@ class Driver:
 
     def set_priority(self, priority):
         self.priority = priority
+
+    def set_timetable(self, timetable):
+        self.timetable = timetable
+
+    def clear_timetable(self):
+        self.timetable = None
