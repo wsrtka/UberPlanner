@@ -6,16 +6,14 @@ class MemoryHandler:
 
         self.cars = []
         self.drivers = []
-        self.timetables = []
 
     def save_car(self, car):
         self.cars.append(car)
 
     def save_driver(self, driver):
-        self.drivers.append(driver)
 
-    def save_timetable(self, timetable):
-        self.timetables.append(timetable)
+        if driver not in self.drivers:
+            self.drivers.append(driver)
 
     def get_cars(self):
         return self.cars
@@ -23,15 +21,14 @@ class MemoryHandler:
     def get_drivers(self):
         return self.drivers
 
-    def get_timetables(self):
-        return self.timetables
+    def get_driver(self, surname, name=None):
 
-    def get_driver(self, name, surname=None):
+        results = []
 
         for driver in self.drivers:
             
-            if driver.name == name and driver.surname == surname:
+            if (driver.name == name and driver.surname == surname) or (not name and driver.surname == surname):
                 
-                return driver
+                results.append(driver)
 
-        return None
+        return results

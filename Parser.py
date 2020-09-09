@@ -92,7 +92,7 @@ class Parser:
 
                 driver = self.memory_handler.get_driver(owner[0], owner[1])
 
-                if driver is None:
+                if not driver:
                     print('Could not find driver!')
                     return
 
@@ -105,7 +105,7 @@ class Parser:
 
                     new_timetable.set_preferences(day, (start_time, end_time))
                 
-                self.memory_handler.save_timetable(new_timetable)
+                driver.set_timetable(new_timetable)
 
         elif words[0] == 'get':
 
@@ -115,17 +115,11 @@ class Parser:
             elif words[1] == 'driver':
                 pass
 
-            elif words[1] == 'timetable':
-                pass
-
             elif words[1] == 'cars':
                 print(self.memory_handler.get_cars())
 
             elif words[1] == 'drivers':
                 print(self.memory_handler.get_drivers())
-
-            elif words[1] == 'timetables':
-                pass
 
             elif words[1] == 'solution':
                 pass
