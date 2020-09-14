@@ -11,7 +11,14 @@ class Parser:
     Uber Planner - an app to manage Your Uber fleet timetable - made by Witold Serwatka
     List of available commands:
         help                shows a list of available commands
-        add [Driver | Car]  adds new objects
+        add 
+                driver      adds a new driver
+                car         adds a new car
+                timetable   adds timetable for specified driver
+        get
+                driver/s    gets a specified driver or all drivers
+                car/s       gets a specified car or all cars
+                solution    gets a timetable for all drivers
         exit                closes the program
     """
 
@@ -110,10 +117,25 @@ class Parser:
         elif words[0] == 'get':
 
             if words[1] == 'car':
-                pass
+                
+                plate = self.get_user_input('car license plate')
+
+                car = self.memory_handler.get_car_by_plate(plate)
+
+                print(car)
 
             elif words[1] == 'driver':
-                pass
+                
+                surname = self.get_user_input('driver surname and name')
+                surname = surname.split()
+
+                if len(surname) == 2:
+                    driver = self.memory_handler.get_driver(surname[0], surname[1])
+                
+                else:
+                    driver = self.memory_handler.get_driver(surname[0])
+
+                print(driver)
 
             elif words[1] == 'cars':
                 print(self.memory_handler.get_cars())
