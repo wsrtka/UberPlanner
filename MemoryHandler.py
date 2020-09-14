@@ -28,7 +28,26 @@ class MemoryHandler:
         for driver in self.drivers:
             
             if (driver.name == name and driver.surname == surname) or (not name and driver.surname == surname):
-                
                 results.append(driver)
 
         return results
+
+    def get_car_by_model(self, model):
+        
+        results = []
+
+        for car in self.cars:
+
+            if car.model == model:
+                results.append(car)
+
+        return results
+
+    def get_car_by_plate(self, plate):
+        
+        for car in self.cars:
+
+            if car.plate == plate:
+                return car
+
+        return None
