@@ -32,6 +32,7 @@ class MemoryHandler:
 
         return results
 
+# TODO: replace the below function with filter class
     def get_car_by_model(self, model):
         
         results = []
@@ -43,6 +44,7 @@ class MemoryHandler:
 
         return results
 
+# TODO: replace the below function with filter class
     def get_car_by_plate(self, plate):
         
         for car in self.cars:
