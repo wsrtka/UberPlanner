@@ -20,3 +20,6 @@ class Driver:
 
     def clear_timetable(self):
         self.timetable = None
+
+    def get_name(self):
+        return self.name + self.surname

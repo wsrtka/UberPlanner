@@ -1,9 +1,17 @@
+from Timetable import Timetable
 
 
 class Car:
 
     def __init__(self):
         self.rating = 3
+        self.reset_timetable()
+
+    def reset_timetable(self):
+        self.timetable = Timetable()
+
+    def set_timetable(self, timetable):
+        self.timetable = timetable
 
     def set_manufacturer(self, manufacturer):
         self.manufacturer = manufacturer
