@@ -4,6 +4,7 @@ import sys
 from Driver import Driver
 from Car import Car
 from Timetable import Timetable
+from utils import solve
 
 
 class Parser:
@@ -144,7 +145,13 @@ class Parser:
                 print(self.memory_handler.get_drivers())
 
             elif words[1] == 'solution':
-                pass
+                
+                solve(self.memory_handler)
+                
+                cars = self.memory_handler.get_cars()
+                
+                for car in cars:
+                    print(car.timetable)
 
         else:
             print('Could not understand input')
