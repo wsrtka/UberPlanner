@@ -28,3 +28,14 @@ def solve(memory_handler):
                 
                 else:
                     car.timetable.set_solution(day, driver.timetable, driver.get_name())
+
+        shuffle(drivers)
+
+        for driver in drivers:
+            for car in cars:
+
+                if car.timetable.collides(driver.timetable, day, driver.get_name()):
+                    continue
+                
+                else:
+                    car.timetable.set_solution(day, driver.timetable, driver.get_name())
