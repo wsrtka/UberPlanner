@@ -6,6 +6,9 @@ class Driver:
         self.priority = False
         self.timetable = None
 
+    def __str__(self):
+        return self.name + ' ' + self.surname + ' priority: ' + str(self.priority)
+
     def set_name(self, name):
         self.name = name
 
@@ -23,3 +26,5 @@ class Driver:
 
     def get_name(self):
         return self.name + self.surname
+
+    __repr__ = __str__

@@ -7,6 +7,9 @@ class Car:
         self.rating = 3
         self.reset_timetable()
 
+    def __str__(self):
+        return self.manufacturer + ' ' + self.model + ' ' + self.plate
+
     def reset_timetable(self):
         self.timetable = Timetable()
 
@@ -39,3 +42,5 @@ class Car:
 
     def set_rating(self, rating):
         self.rating = rating
+
+    __repr__ = __str__

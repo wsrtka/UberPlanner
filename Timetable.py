@@ -5,6 +5,9 @@ class Timetable:
     def __init__(self):
         self.dispositions = [[False] * 24 for i in range(7)]
 
+    def __str__(self):
+        return self.dispositions
+
     def collides(self, other, day, driver):
         
         for hour in range(24):
@@ -42,3 +45,5 @@ class Timetable:
 
             for i in range(times[0], times[1]):
                 self.dispositions[day][i] = True
+
+    __repr__ = __str__
