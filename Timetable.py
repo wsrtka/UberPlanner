@@ -1,12 +1,20 @@
+import json
 
 
 class Timetable:
 
+
     def __init__(self):
         self.dispositions = [[False] * 24 for i in range(7)]
 
+    
     def __str__(self):
         return self.dispositions
+
+    
+    def toJson(self):
+        return json.dumps(self, default=lambda o: o.__dict__)
+
 
     def collides(self, other, day, driver):
         
@@ -20,6 +28,7 @@ class Timetable:
 
         return False
 
+   
     def set_solution(self, day, preferences, driver):
         
         for hour in range(24):
@@ -31,6 +40,7 @@ class Timetable:
                 self.dispositions[(day + 1) % 7][hour] = driver
 
 
+    
     def set_preferences(self, day, times):
 
         if times[0] >= times[1]:
@@ -45,5 +55,6 @@ class Timetable:
 
             for i in range(times[0], times[1]):
                 self.dispositions[day][i] = True
+
 
     __repr__ = __str__

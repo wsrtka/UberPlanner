@@ -1,4 +1,5 @@
 import json
+from Car import Car
 
 
 class MemoryHandler:
@@ -60,6 +61,6 @@ class MemoryHandler:
         for car in self.cars:
 
             if car.plate == plate:
-                return car
+                return Car(**car)
 
         return None
