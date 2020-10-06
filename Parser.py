@@ -45,6 +45,8 @@ class Parser:
             print(self.__doc__)
 
         elif words[0] == 'exit':
+            
+            self.memory_handler.save_all_data()
             sys.exit()
 
         elif words[0] == 'add':
