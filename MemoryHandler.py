@@ -1,6 +1,7 @@
 import json
 import pickle
 from Car import Car
+from Driver import Driver
 
 
 class MemoryHandler:
@@ -12,29 +13,49 @@ class MemoryHandler:
             self.settings = json.load(file)
 
         with open(self.settings['drivers_savefile'], 'rb') as file:
-            self.drivers = pickle.load(file)
+            
+            saved_drivers = pickle.load(file)
+            self.drivers = []
+
+            for driver in saved_drivers:
+                self.drivers.append(Driver(**driver))
+
 
         with open(self.settings['cars_savefile'], 'rb') as file:
-            self.cars = pickle.load(file)
+            
+            saved_cars = pickle.load(file)
+            self.cars = []
+
+            for car in saved_cars:
+                self.cars.append(Car(**car))
 
 
     def save_car(self, car):
-        self.cars.append(car.__dict__)
+        self.cars.append(car)
 
 
     def save_driver(self, driver):
 
         if driver.__dict__ not in self.drivers:
-            self.drivers.append(driver.__dict__)
+            self.drivers.append(driver)
 
 
     def save_all_data(self):
 
+        drivers_to_save = []
+        cars_to_save = []
+
+        for driver in self.drivers:
+            drivers_to_save.append(driver.__dict__)
+
+        for car in self.cars:
+            cars_to_save.append(car.__dict__)
+
         with open(self.settings['drivers_savefile'], 'wb') as file:
-            pickle.dump(self.drivers, file)
+            pickle.dump(drivers_to_save, file)
 
         with open(self.settings['cars_savefile'], 'wb') as file:
-            pickle.dump(self.cars, file) 
+            pickle.dump(cars_to_save, file) 
 
 
     def get_cars(self):
@@ -62,6 +83,6 @@ class MemoryHandler:
         for car in self.cars:
 
             if car.plate == plate:
-                return Car(**car)
+                return car
 
         return None

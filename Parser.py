@@ -100,7 +100,12 @@ class Parser:
                 owner = self.get_user_input('timetable owner')
                 owner = owner.split()
 
-                driver = self.memory_handler.get_driver(owner[0], owner[1])
+                if len(owner) == 2:
+                    driver = self.memory_handler.get_driver(owner[0], owner[1])
+                else:
+                    driver = self.memory_handler.get_driver(owner[0])
+
+                    # TODO: what if there are multiple drivers returned?
 
                 if not driver:
                     print('Could not find driver!')
@@ -108,14 +113,13 @@ class Parser:
 
                 for day in range(7):
                     
-                    start_time = self.get_user_input('beginning of shift for day ' + day, required=False)
+                    start_time = self.get_user_input('beginning of shift for day ' + str(day), required=False)
                     
-                    if len(start_time):
+                    if start_time:
                         end_time = self.get_user_input('end of shift')
-
-                    new_timetable.set_preferences(day, (start_time, end_time))
+                        new_timetable.set_preferences(day, (int(start_time), int(end_time)))
                 
-                driver.set_timetable(new_timetable)
+                driver[0].set_timetable(new_timetable)
 
         elif words[0] == 'get':
 

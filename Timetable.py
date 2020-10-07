@@ -16,10 +16,10 @@ class Timetable:
         
         for hour in range(24):
             
-            if self.dispositions[day][hour] and other[day][hour] and not self.dispositions[day][hour] == driver:
+            if self.dispositions[day][hour] and other.dispositions[day][hour] and not self.dispositions[day][hour] == driver:
                 return True
 
-            if hour < 12 and self.dispositions[(day + 1) % 7][hour] and other[(day + 1) % 7][hour] and not self.dispositions[(day + 1) % 7][hour] == driver:
+            if hour < 12 and self.dispositions[(day + 1) % 7][hour] and other.dispositions[(day + 1) % 7][hour] and not self.dispositions[(day + 1) % 7][hour] == driver:
                 return True
 
         return False
@@ -29,10 +29,10 @@ class Timetable:
         
         for hour in range(24):
 
-            if preferences[day][hour]:
+            if preferences.dispositions[day][hour]:
                 self.dispositions[day][hour] = driver
 
-            if hour < 12 and preferences[(day + 1) % 7][hour]:
+            if hour < 12 and preferences.dispositions[(day + 1) % 7][hour]:
                 self.dispositions[(day + 1) % 7][hour] = driver
 
 

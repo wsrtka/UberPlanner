@@ -2,9 +2,11 @@
 
 class Driver:
 
-    def __init__(self):
-        self.priority = False
-        self.timetable = None
+    def __init__(self, name='', surname='', priority=False, timetable=None):
+        self.priority = priority
+        self.timetable = timetable
+        self.name = name
+        self.surname = surname
 
     def __str__(self):
         return self.name + ' ' + self.surname + ' priority: ' + str(self.priority)

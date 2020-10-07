@@ -4,9 +4,22 @@ from Timetable import Timetable
 class Car:
 
 
-    def __init__(self):
-        self.rating = 3
-        self.reset_timetable()
+    def __init__(self, rating=3, timetable=None, manufacturer='', model='', color='', plate='', body='', fuel='', card='', pin=''):
+        
+        self.rating = rating
+        self.manufacturer = manufacturer
+        self.model = model
+        self.color = color
+        self.plate = plate
+        self.body = body
+        self.fuel = fuel
+        self.card = card
+        self.pin = pin
+
+        if timetable:
+            self.timetable = timetable
+        else:
+            self.reset_timetable()
 
 
     def __str__(self):
