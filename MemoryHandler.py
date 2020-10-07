@@ -1,4 +1,5 @@
 import json
+import pickle
 from Car import Car
 
 
@@ -10,11 +11,11 @@ class MemoryHandler:
         with open('settings.json', 'r') as file:
             self.settings = json.load(file)
 
-        with open(self.settings['drivers_savefile'], 'r') as file:
-            self.drivers = json.load(file)
+        with open(self.settings['drivers_savefile'], 'rb') as file:
+            self.drivers = pickle.load(file)
 
-        with open(self.settings['cars_savefile'], 'r') as file:
-            self.cars = json.load(file)
+        with open(self.settings['cars_savefile'], 'rb') as file:
+            self.cars = pickle.load(file)
 
 
     def save_car(self, car):
@@ -29,11 +30,11 @@ class MemoryHandler:
 
     def save_all_data(self):
 
-        with open(self.settings['drivers_savefile'], 'w') as file:
-            json.dump(self.drivers, file)
+        with open(self.settings['drivers_savefile'], 'wb') as file:
+            pickle.dump(self.drivers, file)
 
-        with open(self.settings['cars_savefile'], 'w') as file:
-            json.dump(self.cars, file) 
+        with open(self.settings['cars_savefile'], 'wb') as file:
+            pickle.dump(self.cars, file) 
 
 
     def get_cars(self):

@@ -10,7 +10,7 @@ class Car:
 
 
     def __str__(self):
-        return self.manufacturer + ' ' + self.model + ' ' + self.plate\
+        return self.manufacturer + ' ' + self.model + ' ' + self.plate
 
 
     def reset_timetable(self):

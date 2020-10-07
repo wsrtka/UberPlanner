@@ -1,4 +1,4 @@
 {
-    "drivers_savefile": "drivers.json",
-    "cars_savefile": "cars.json"
+    "drivers_savefile": "drivers",
+    "cars_savefile": "cars"
 }

@@ -9,11 +9,7 @@ class Timetable:
 
     
     def __str__(self):
-        return self.dispositions
-
-    
-    def toJson(self):
-        return json.dumps(self, default=lambda o: o.__dict__)
+        return str(self.dispositions)
 
 
     def collides(self, other, day, driver):
