@@ -5,12 +5,13 @@ from MemoryHandler import MemoryHandler
 if __name__ == '__main__':
 
     memory_handler = MemoryHandler()
-    input_parser = Parser(memory_handler)
+# this code is used to run the CLI of the app
+    # input_parser = Parser(memory_handler)
 
-    input_parser.parse('help')
+    # input_parser.parse('help')
 
-    while True:
+    # while True:
 
-        action = input('Select action\n')
+    #     action = input('Select action\n')
 
-        input_parser.parse(action)
+    #     input_parser.parse(action)
