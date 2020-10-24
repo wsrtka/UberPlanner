@@ -1,11 +1,14 @@
-import sys
+import sys, os
 
 from Parser import Parser
 from MemoryHandler import MemoryHandler
 from Window import Window
+from PyQt5.QtWidgets import QApplication
 
 
 if __name__ == '__main__':
+
+    os.putenv('DISPLAY', ':0.0')
 
     memory_handler = MemoryHandler()
 # this code is used to run the CLI of the app
@@ -19,5 +22,6 @@ if __name__ == '__main__':
 
     #     input_parser.parse(action)
 
-    app = Window()
+    app = QApplication(sys.argv)
+    window = Window()
     sys.exit(app.exec_())
