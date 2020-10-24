@@ -1,5 +1,8 @@
+import sys
+
 from Parser import Parser
 from MemoryHandler import MemoryHandler
+from Window import Window
 
 
 if __name__ == '__main__':
@@ -15,3 +18,6 @@ if __name__ == '__main__':
     #     action = input('Select action\n')
 
     #     input_parser.parse(action)
+
+    app = Window()
+    sys.exit(app.exec_())
