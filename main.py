@@ -23,5 +23,5 @@ if __name__ == '__main__':
     #     input_parser.parse(action)
 
     app = QApplication(sys.argv)
-    window = Window()
+    window = Window(memory_handler)
     sys.exit(app.exec_())
