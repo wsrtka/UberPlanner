@@ -24,6 +24,7 @@ class Window(QMainWindow):
 
         self.initUI()
 
+
     def initUI(self):
         self.setGeometry(30, 30, self.width - 60, self.height - 60)
         self.create_menu_bar()
@@ -39,19 +40,26 @@ class Window(QMainWindow):
 
         self.show()
 
+
     def create_menu_bar(self):
         main_menu = self.menuBar()
         file_menu = main_menu.addMenu('Aplikacja')
 
         exit_button = QAction(QIcon('exit24.png'), 'Wyjdż', self)
         exit_button.setStatusTip('Wyjście z aplikacji')
+        exit_button.setShortcut('Ctrl+Q')
         exit_button.triggered.connect(self.close)
 
         file_menu.addAction(exit_button)
 
+
     def create_timetable(self):
         self.timetable = QTableWidget()
-        self.timetable.setRowCount(25)
+        self.timetable.setRowCount(176)
         self.timetable.setColumnCount(len(self.memory_handler.get_cars()))
-
-        # self.layout.addWidget(self.timetable)
+        
+        for i, car in enumerate(self.memory_handler.get_cars()):
+            self.timetable.setItem(0, i, QTableWidgetItem(car.plate))
+            for d, day in enumerate(car.timetable.dispositions):
+                for h, hour in enumerate(day):
+                    self.timetable.setItem((d * 8) + h, i, QTableWidgetItem(hour if hour else ''))
