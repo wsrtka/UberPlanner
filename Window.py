@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QMainWindow, QAction, QHBoxLayout, QTableWidget, QTableWidgetItem
-from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget, QMainWindow, QAction, QHBoxLayout, QTableWidget, QTableWidgetItem, QPushButton, QTabWidget
+from PyQt5.QtCore import Qt, pyqtSlot
 from PyQt5.QtGui import QIcon
 from screeninfo import get_monitors
 
@@ -29,12 +29,18 @@ class Window(QMainWindow):
         self.setGeometry(30, 30, self.width - 60, self.height - 60)
         self.create_menu_bar()
 
-        self.create_timetable()
+        self.create_timetable_tab()
+        self.create_driver_section()
 
-        self.workspace = QWidget()
-        self.workspace_layout = QHBoxLayout()
-        self.workspace_layout.addWidget(self.timetable)
-        self.workspace.setLayout(self.workspace_layout)
+        # self.workspace = QWidget()
+        # self.workspace_layout = QHBoxLayout()
+        # self.workspace_layout.addWidget(self.timetable)
+        # self.workspace_layout.addWidget(self.driver_management)
+        # self.workspace.setLayout(self.workspace_layout)
+
+        self.workspace = QTabWidget()
+        self.workspace.addTab(self.timetable_tab, "Grafik")
+        self.workspace.addTab(self.driver_management, "Kierowcy")
 
         self.setCentralWidget(self.workspace)
 
@@ -53,7 +59,11 @@ class Window(QMainWindow):
         file_menu.addAction(exit_button)
 
 
-    def create_timetable(self):
+    def create_timetable_tab(self):
+        
+        self.timetable_tab = QWidget()
+        timetable_tab_layout = QHBoxLayout()
+
         self.timetable = QTableWidget()
         self.timetable.setRowCount(176)
         self.timetable.setColumnCount(len(self.memory_handler.get_cars()) + 1)
@@ -75,3 +85,29 @@ class Window(QMainWindow):
 
                     if i == 0:
                         self.timetable.setItem((d * 25) + h + 2, i, QTableWidgetItem(hours_of_the_day[h]))
+
+        create_timetable_button = QPushButton("Ułóż grafik", self)
+        create_timetable_button.clicked.connect(self.create_timetable)
+
+        export_timetable_button = QPushButton("Eksportuj", self)
+        export_timetable_button.clicked.connect(self.export_timetable)
+
+        timetable_tab_layout.addWidget(self.timetable)
+        timetable_tab_layout.addWidget(create_timetable_button)
+        timetable_tab_layout.addWidget(export_timetable_button)
+
+        self.timetable_tab.setLayout(timetable_tab_layout)
+
+
+    @pyqtSlot()
+    def create_timetable(self):
+        pass
+
+
+    @pyqtSlot()
+    def export_timetable(self):
+        pass
+
+
+    def create_driver_section(self):
+        self.driver_management = QWidget()
