@@ -56,10 +56,22 @@ class Window(QMainWindow):
     def create_timetable(self):
         self.timetable = QTableWidget()
         self.timetable.setRowCount(176)
-        self.timetable.setColumnCount(len(self.memory_handler.get_cars()))
+        self.timetable.setColumnCount(len(self.memory_handler.get_cars()) + 1)
+
+        days_of_the_week = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"]
+        hours_of_the_day = [str(h) + ":" + 2 * "0" for h in range(24)] 
         
         for i, car in enumerate(self.memory_handler.get_cars()):
-            self.timetable.setItem(0, i, QTableWidgetItem(car.plate))
+            self.timetable.setItem(0, i + 1, QTableWidgetItem(car.plate))
+
             for d, day in enumerate(car.timetable.dispositions):
+                self.timetable.setItem(d * 25 + 1, i + 1, QTableWidgetItem(days_of_the_week[d]))
+
+                if i == 0:
+                    self.timetable.setItem(d * 25 + 1, i, QTableWidgetItem(days_of_the_week[d]))
+
                 for h, hour in enumerate(day):
-                    self.timetable.setItem((d * 8) + h, i, QTableWidgetItem(hour if hour else ''))
+                    self.timetable.setItem((d * 25) + h + 2, i + 1, QTableWidgetItem(hour if hour else ''))
+
+                    if i == 0:
+                        self.timetable.setItem((d * 25) + h + 2, i, QTableWidgetItem(hours_of_the_day[h]))
