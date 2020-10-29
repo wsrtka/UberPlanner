@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QMainWindow, QAction, QHBoxLayout, QVBoxLay
 from PyQt5.QtCore import Qt, pyqtSlot
 from PyQt5.QtGui import QIcon
 from screeninfo import get_monitors
+from utils import ButtonFactory
 
 
 class Window(QMainWindow):
@@ -10,6 +11,7 @@ class Window(QMainWindow):
         super().__init__()
         
         self.memory_handler = memory_handler
+        self.button_factory = ButtonFactory()
         self.title = "UberPlanner"
         
         monitors = get_monitors()
@@ -163,3 +165,48 @@ class Window(QMainWindow):
 
     def create_cars_tab(self):
         self.cars_tab = QWidget()
+
+        cars_tab_layout = QVBoxLayout()
+
+        add_car_button = self.button_factory.get_button('Dodaj samochód', self.add_car, parent=self)
+        cars_tab_layout.addWidget(add_car_button)
+
+        for c, car in enumerate(self.memory_handler.get_cars()):
+            cars_menu = QWidget()
+            cars_menu_layout = QHBoxLayout()
+
+            label = QLabel()
+            label.setText(str(c + 1) + " \t " + str(car))
+            cars_menu_layout.addWidget(label)
+
+            add_car_event_button = self.button_factory.get_button('Dodaj zdarzenie', self.add_car_event, parent=self)
+            cars_menu_layout.addWidget(add_car_event_button)
+
+            show_car_timetable_button = self.button_factory.get_button('Podglądnij grafik', self.show_car_timetable, parent=self)
+            cars_menu_layout.addWidget(show_car_timetable_button)
+
+            remove_car_button = self.button_factory.get_button('Usuń', self.remove_car, parent=self)
+            cars_menu_layout.addWidget(remove_car_button)
+
+            cars_menu.setLayout(cars_menu_layout)
+
+            cars_tab_layout.addWidget(cars_menu)
+
+        self.cars_tab.setLayout(cars_tab_layout)
+        
+
+    @pyqtSlot()
+    def add_car(self):
+        pass
+
+    @pyqtSlot()
+    def add_car_event(self):
+        pass
+
+    @pyqtSlot()
+    def show_car_timetable(self):
+        pass
+
+    @pyqtSlot()
+    def remove_car(self):
+        pass
