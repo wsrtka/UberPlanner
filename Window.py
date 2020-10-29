@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QMainWindow, QAction, QHBoxLayout, QVBoxLayout, QTableWidget, QTableWidgetItem, QPushButton, QTabWidget
+from PyQt5.QtWidgets import QWidget, QMainWindow, QAction, QHBoxLayout, QVBoxLayout, QTableWidget, QTableWidgetItem, QPushButton, QTabWidget, QLabel
 from PyQt5.QtCore import Qt, pyqtSlot
 from PyQt5.QtGui import QIcon
 from screeninfo import get_monitors
@@ -30,11 +30,11 @@ class Window(QMainWindow):
         self.create_menu_bar()
 
         self.create_timetable_tab()
-        self.create_driver_section()
+        self.create_drivers_tab()
 
         self.workspace = QTabWidget()
         self.workspace.addTab(self.timetable_tab, "Grafik")
-        self.workspace.addTab(self.driver_management, "Kierowcy")
+        self.workspace.addTab(self.drivers_tab, "Kierowcy")
 
         self.setCentralWidget(self.workspace)
 
@@ -109,6 +109,58 @@ class Window(QMainWindow):
     def export_timetable(self):
         pass
 
+# TODO: add a drivers search field
+    def create_drivers_tab(self):
+        self.drivers_tab = QWidget()
 
-    def create_driver_section(self):
-        self.driver_management = QWidget()
+        drivers_tab_layout = QVBoxLayout()
+
+        create_driver_button = QPushButton('Dodaj kierowcę', self)
+        create_driver_button.clicked.connect(self.create_driver)
+
+        drivers_tab_layout.addWidget(create_driver_button)
+
+        for d, driver in enumerate(self.memory_handler.get_drivers()):
+            driver_menu = QWidget()
+            driver_menu_layout = QHBoxLayout()
+
+            label = QLabel()
+            label.setText(str(d + 1) + " \t " + str(driver))
+            driver_menu_layout.addWidget(label)
+
+            # TODO: create a button factory
+
+            add_driver_timetable_button = QPushButton('Dodaj grafik', self)
+            add_driver_timetable_button.clicked.connect(self.add_driver_timetable)
+            driver_menu_layout.addWidget(add_driver_timetable_button)
+
+            change_driver_timetable_button = QPushButton('Edytuj grafik', self)
+            change_driver_timetable_button.clicked.connect(self.change_driver_timetable)
+            driver_menu_layout.addWidget(change_driver_timetable_button)
+
+            remove_driver_button = QPushButton('Usuń', self)
+            remove_driver_button.clicked.connect(self.remove_driver)
+            driver_menu_layout.addWidget(remove_driver_button)
+
+            driver_menu.setLayout(driver_menu_layout)
+
+            drivers_tab_layout.addWidget(driver_menu)
+
+        self.drivers_tab.setLayout(drivers_tab_layout)
+
+
+    @pyqtSlot()
+    def create_driver(self):
+        pass
+
+    @pyqtSlot()
+    def add_driver_timetable(self):
+        pass
+
+    @pyqtSlot()
+    def change_driver_timetable(self):
+        pass
+
+    @pyqtSlot()
+    def remove_driver(self):
+        pass
