@@ -1,4 +1,5 @@
 from random import shuffle
+from PyQt5.QtWidgets import QPushButton
 
 
 def solve(memory_handler):
@@ -39,3 +40,16 @@ def solve(memory_handler):
                 
                 else:
                     car.timetable.set_solution(day, driver.timetable, driver.get_name())
+
+
+class ButtonFactory:
+
+    def __init__(self):
+        pass
+
+    def get_button(self, name, function, parent=None, icon=None):
+        button = QPushButton(name, parent=parent)
+        button.clicked.connect(function)
+        if icon:
+            button.setIcon(icon) 
+        return button

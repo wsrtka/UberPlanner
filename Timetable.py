@@ -35,7 +35,6 @@ class Timetable:
             if hour < 12 and preferences.dispositions[(day + 1) % 7][hour]:
                 self.dispositions[(day + 1) % 7][hour] = driver
 
-
     
     def set_preferences(self, day, times):
 
