@@ -11,13 +11,6 @@ class Window(QMainWindow):
         
         self.memory_handler = memory_handler
         self.title = "UberPlanner"
-
-        #TODO: 
-        # 1. trzeba zrobić żeby po lewej była tabela z samochodami i ich obłożeniem (czyli reprezentująca timetable samochodu)
-        # 2. po prawej trzeba dodać listę kierowców z opcjami edycji ich atrybutów
-        # 3. dodać przycisk tworzący grafik
-        # 4. dodać możliwość eksportowania grafiku
-        # 5. ewentualnie dodać zczytywanie z pola tekstowego dyspozycji na kolejny tydzień
         
         monitors = get_monitors()
         self.width, self.height = monitors[0].width, monitors[0].height
@@ -31,10 +24,12 @@ class Window(QMainWindow):
 
         self.create_timetable_tab()
         self.create_drivers_tab()
+        self.create_cars_tab()
 
         self.workspace = QTabWidget()
         self.workspace.addTab(self.timetable_tab, "Grafik")
         self.workspace.addTab(self.drivers_tab, "Kierowcy")
+        self.workspace.addTab(self.cars_tab, "Samochody")
 
         self.setCentralWidget(self.workspace)
 
@@ -164,3 +159,7 @@ class Window(QMainWindow):
     @pyqtSlot()
     def remove_driver(self):
         pass
+
+
+    def create_cars_tab(self):
+        self.cars_tab = QWidget()
