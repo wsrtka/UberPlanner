@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QMainWindow, QAction, QHBoxLayout, QTableWidget, QTableWidgetItem, QPushButton, QTabWidget
+from PyQt5.QtWidgets import QWidget, QMainWindow, QAction, QHBoxLayout, QVBoxLayout, QTableWidget, QTableWidgetItem, QPushButton, QTabWidget
 from PyQt5.QtCore import Qt, pyqtSlot
 from PyQt5.QtGui import QIcon
 from screeninfo import get_monitors
@@ -31,12 +31,6 @@ class Window(QMainWindow):
 
         self.create_timetable_tab()
         self.create_driver_section()
-
-        # self.workspace = QWidget()
-        # self.workspace_layout = QHBoxLayout()
-        # self.workspace_layout.addWidget(self.timetable)
-        # self.workspace_layout.addWidget(self.driver_management)
-        # self.workspace.setLayout(self.workspace_layout)
 
         self.workspace = QTabWidget()
         self.workspace.addTab(self.timetable_tab, "Grafik")
@@ -92,9 +86,16 @@ class Window(QMainWindow):
         export_timetable_button = QPushButton("Eksportuj", self)
         export_timetable_button.clicked.connect(self.export_timetable)
 
+        timetable_buttons = QWidget()
+        timetable_buttons_layout = QVBoxLayout()
+
+        timetable_buttons_layout.addWidget(create_timetable_button)
+        timetable_buttons_layout.addWidget(export_timetable_button)
+
+        timetable_buttons.setLayout(timetable_buttons_layout)
+
         timetable_tab_layout.addWidget(self.timetable)
-        timetable_tab_layout.addWidget(create_timetable_button)
-        timetable_tab_layout.addWidget(export_timetable_button)
+        timetable_tab_layout.addWidget(timetable_buttons)
 
         self.timetable_tab.setLayout(timetable_tab_layout)
 
